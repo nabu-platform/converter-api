@@ -1,0 +1,12 @@
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="be.nabu.libs.converter.ConverterFactory">
+	
+	<implementation class="be.nabu.libs.converter.ConverterFactory" />
+	
+	<reference name="ConverterFactory"
+		interface="be.nabu.libs.converter.api.Converter"
+		bind="addConverter"
+		unbind="removeConverter"
+		cardinality="0..n"
+		policy="static"/>
+
+</scr:component>
