@@ -9,6 +9,9 @@ You can plug in "converter-base" which provides a number of default converters o
 These examples come from the testcases of converter-base:
 
 ```java
+// the factory instance can be configured using OSGI, if unavailable it uses SPI or manual configuration
+Converter converter = ConverterFactory.getInstance().getConverter();
+
 assertTrue(converter.canConvert(
 	Boolean.class, 
 	String.class)
