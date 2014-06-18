@@ -7,9 +7,15 @@ import be.nabu.libs.converter.api.Converter;
 public class MultipleConverter implements Converter {
 
 	private List<Converter> converters;
+	private boolean throwException = true;
 	
 	public MultipleConverter(List<Converter> converters) {
 		this.converters = converters;
+		// set throwException of nested multiple converters to false because this converter will throw the exception if necessary
+		for (Converter converter : converters) {
+			if (converter instanceof MultipleConverter)
+				((MultipleConverter) converter).throwException = false;
+		}
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -25,7 +31,7 @@ public class MultipleConverter implements Converter {
 		if (converted == null && instance != null) {
 			if (targetClass.isAssignableFrom(instance.getClass()))
 				return (T) instance;
-			else
+			else if (throwException)
 				throw new ClassCastException("Can not convert " + instance.getClass() + " to " + targetClass);
 		}
 		return converted;
