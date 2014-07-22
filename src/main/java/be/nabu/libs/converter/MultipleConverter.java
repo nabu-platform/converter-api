@@ -21,6 +21,12 @@ public class MultipleConverter implements Converter {
 	@SuppressWarnings("unchecked")
 	@Override
 	public <T> T convert(Object instance, Class<T> targetClass) {
+		if (instance == null) {
+			return null;
+		}
+		else if (instance.getClass().equals(targetClass)) {
+			return (T) instance;
+		}
 		T converted = null;
 		for (Converter converter : converters) {
 			converted = converter.convert(instance, targetClass);
