@@ -7,6 +7,6 @@
 		bind="addConverter"
 		unbind="removeConverter"
 		cardinality="0..n"
-		policy="static"/>
+		policy="dynamic"/>
 
 </scr:component>
