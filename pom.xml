@@ -4,7 +4,7 @@
 	<groupId>be.nabu.libs.converter</groupId>
 	<artifactId>converter-api</artifactId>
 	<packaging>bundle</packaging>
-	<version>1.0-SNAPSHOT</version>
+	<version>1.0</version>
 	<name>converter-api</name>
 	<url>http://nabu.be</url>
 	<description>A framework for object conversions</description>
