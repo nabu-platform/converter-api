@@ -13,8 +13,13 @@ public class ConverterFactory {
 	private static ConverterFactory instance;
 	
 	public static ConverterFactory getInstance() {
-		if (instance == null)
-			instance = new ConverterFactory();
+		if (instance == null) {
+			synchronized(ConverterFactory.class) {
+				if (instance == null) {
+					instance = new ConverterFactory();
+				}
+			}
+		}
 		return instance;
 	}
 	
