@@ -3,10 +3,13 @@ package be.nabu.libs.converter;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.ServiceLoader;
 
 import be.nabu.libs.converter.api.Converter;
+import be.nabu.libs.converter.api.PrioritizedConverter;
 
 public class ConverterFactory {
 
@@ -68,6 +71,14 @@ public class ConverterFactory {
 						converters.add(converter);
 					}
 				}
+				Collections.sort(converters, new Comparator<Converter>() {
+					@Override
+					public int compare(Converter o1, Converter o2) {
+						int priority1 = o1 instanceof PrioritizedConverter ? ((PrioritizedConverter) o1).getPriority() : 0;
+						int priority2 = o2 instanceof PrioritizedConverter ? ((PrioritizedConverter) o2).getPriority() : 0;
+						return priority2 - priority1;
+					}
+				});
 			}
 			converter = new MultipleConverter(converters);
 		}
