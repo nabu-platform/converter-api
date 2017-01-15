@@ -46,7 +46,7 @@ public class MultipleConverter implements Converter {
 				return (T) instance;
 			}
 			else if (throwException) {
-				throw new ClassCastException("Can not convert " + instance.getClass() + " to " + targetClass);
+				throw new ClassCastException("Can not convert " + instance.getClass() + " to " + targetClass + ": " + instance);
 			}
 		}
 		return converted;
