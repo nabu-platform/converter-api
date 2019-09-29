@@ -80,7 +80,7 @@ public class ConverterFactory {
 					}
 				});
 			}
-			converter = new MultipleConverter(converters);
+			converter = new MultipleConverter(converters, false);
 		}
 		return converter;
 	}

@@ -7,15 +7,21 @@ import be.nabu.libs.converter.api.Converter;
 public class MultipleConverter implements Converter {
 
 	private List<Converter> converters;
-	private boolean throwException = true;
+	private boolean throwException;
 	
 	public MultipleConverter(List<Converter> converters) {
+		// true because of legacy
+		this(converters, true);
+	}
+	
+	public MultipleConverter(List<Converter> converters, boolean throwException) {
 		this.converters = converters;
 		// set throwException of nested multiple converters to false because this converter will throw the exception if necessary
 		for (Converter converter : converters) {
 			if (converter instanceof MultipleConverter)
 				((MultipleConverter) converter).throwException = false;
 		}
+		this.throwException = throwException;
 	}
 	
 	@SuppressWarnings("unchecked")
